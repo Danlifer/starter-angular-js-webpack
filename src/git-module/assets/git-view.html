@@ -1,0 +1,40 @@
+    <h1>GITHUB REPO APP</h1>
+<div>
+    <h2>order by</h2>
+    <form>
+            <input type="radio" id="bugs" name="filter-option" value="bug" checked ng-click="gitCtlr.searchType=1">
+            <label>Bugs</label>
+            <input type="radio" id="forks" name="filter-option" value="fork" ng-click="gitCtlr.searchType=2">
+            <label">Forks</label>
+            <input type="radio" id="watchers" name="filter-option" value="watcher" ng-click="gitCtlr.searchType=3">
+            <label>Watchers</label>
+    </form>
+</div>
+<h2>Quantity of results={{gitCtlr.data.count}}</h2>
+<div>
+     <p>Set a name to found a repo</p>
+    <input type="text" ng-model="gitCtlr.query" placeholder="repo name">
+    <button id="button-repo" ng-click="gitCtlr.searchQuery()">FIND</button>
+    
+</div>
+<div>
+
+    <table bordercolor=BLACK>
+        <tr>
+            <th>Image</th>
+            <th>name</th>
+            <th>URL</th>
+            <th>Forks Count</th>
+            <th>Bug Count</th>
+            <th>Watchers Count</th>
+        </tr>
+        <tr ng-repeat="repo in gitCtlr.repos">
+            <td> <img src={{repo.avatar}} width="100" height="100"></td>
+            <td>{{repo.name}}</td>
+            <td><a href={{repo.url}}>{{repo.url}}</a></td>
+            <td>Numero de forks:{{repo.forks}}</td>
+            <td>Numero de bugs:{{repo.issues}}</td>
+            <td>Numero de watchers:{{repo.watchers}}</td>
+        </tr>
+    </table>
+</div>
