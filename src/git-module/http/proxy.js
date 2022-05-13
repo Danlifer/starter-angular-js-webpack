@@ -10,7 +10,7 @@ angular
     function proxy($http){
         
         var proxy ={
-
+            get:get,
             getAll:getAll
         }
         return proxy;
@@ -21,6 +21,12 @@ angular
                     url: 'https://api.github.com/search/repositories?q='+ query
                 })
         }
-            
+        
+        function get(query){
+            return $http({
+                method: 'GET',
+                url: 'https://api.github.com/users/'+ query
+            })
+        }
     }
 })();

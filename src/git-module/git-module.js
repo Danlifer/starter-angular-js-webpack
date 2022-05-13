@@ -1,6 +1,5 @@
 //import angular from "angular";
 
 (function(){
-    angular.module('appGit', []);
-    
+    angular.module('appGit',['ngRoute']);
 })()

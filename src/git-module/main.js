@@ -1,6 +1,8 @@
 import './git-module'
 import './controller/git-controller'
+import './controller/git-user-controller'
 import './git-component'
+import './git-user-component'
 import './http/git-httpService'
 import './service/git-webService'
 import './http/proxy'

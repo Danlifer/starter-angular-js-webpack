@@ -1,4 +1,3 @@
-
 (function(){
 'use strict';
 
@@ -6,29 +5,44 @@ angular
     .module('appGit')
     .service('webService',webService);
     
-webService.$inject=['httpService','transformer'];
+webService.$inject=['httpService','transformer','$q'];
 
-
-    function webService(httpService,transformer){
+    function webService(httpService,transformer,$q){
         var service=this;
         service.webToTransform=webToTransform;
-     
+        service.sendDataUser=sendDataUser;
         return service;
-        //return data;
-        function webToTransform(query,searchType){
+
+        function webToTransform(query, searchType){
             
-                return new Promise((resolve,reject)=>{
-        
-                    httpService.returnInfo(query).then((info)=>{
-                            resolve({count:info.total_count,data:transformer.convertToObject(info.items,searchType)});
-                        });
+            return $q((resolve,reject)=>{
+                httpService.returnInfo(query)
+                .then((info)=>{
+                        resolve(
+                            {
+                                count:info.total_count,
+                                data:transformer.convertToObject(info.items,searchType)
+                            });
                 })
-            
-           
+                .catch((reject) =>{
+                    console.log('ERROR: ' + reject);
+                });
+            })
+        }   
+
+        function sendDataUser(query){
+            return $q((resolve,reject)=>{
+                httpService.returnData(query)
+                .then((info)=>{
+                        resolve(
+                            {
+                                data:transformer.convertDataUser(info)
+                            });
+                })
+                .catch((reject) =>{
+                    console.log('ERROR: ' + reject);
+                });
+            })
         }
-       
-           
-
     }
-
 })();
