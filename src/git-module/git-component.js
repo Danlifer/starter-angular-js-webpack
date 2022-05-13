@@ -11,7 +11,5 @@ import template from "./assets/git-view.html"
             template:template
 
         }
-
     )
-
 })(template)

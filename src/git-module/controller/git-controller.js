@@ -10,7 +10,7 @@
     
         function gitController(webService,$rootScope){
             var vm=this;
-            vm.data={};
+            vm.count;
             vm.repos=[];
             vm.query='';
             vm.searchType=1;
@@ -23,7 +23,7 @@
                 webService.webToTransform(vm.query,vm.searchType)
                     .then((response)=>{
                         vm.repos=response.data;
-                        console.log(vm.repos);
+                        vm.count=response.count;
                         $rootScope.$apply();
                     })
             }
